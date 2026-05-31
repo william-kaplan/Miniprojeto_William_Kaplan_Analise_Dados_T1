@@ -52,3 +52,22 @@ print('-'*50)
 print('Tipos de dados de cada coluna do Dataset após conversão e limpeza:')
 print(df_limpa.dtypes)
 print('-'*50)
+
+# estatisticas basicas sobre numero de filhos
+print('-'*5, 'Estátisticas básicas: número de filhos', '-'*5)
+print('Média:', df_limpa['CL_FHL'].mean().round(2))
+print('Mediana:', df_limpa['CL_FHL'].median())
+print('Desvio Padrão:', df_limpa['CL_FHL'].std().round(2))
+print('Moda:', df_limpa['CL_FHL'].mode()[0])
+print('Mínimo:', df_limpa['CL_FHL'].min())
+print('Máximo:', df_limpa['CL_FHL'].max())
+print('Contagem total:', df_limpa['CL_FHL'].count())
+
+# calculando os quartis
+q1 = df_limpa['CL_FHL'].quantile(0.25)
+q2 = df_limpa['CL_FHL'].quantile(0.50)
+q3 = df_limpa['CL_FHL'].quantile(0.75)
+
+print('Q1 = (25%):', q1)
+print('Q2 = (50%):', q2)
+print('Q3 = (75%):', q3)
