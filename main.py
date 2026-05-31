@@ -33,7 +33,7 @@ print('-'*50)
 df_limpa = df.copy()
 
 # verificando se tem valores nulos na coluna PR_CAT se tiver alterar para 'Sem Categoria'
-df_limpa['PR_CAT'] = df_limpa['PR_CAT'].apply(lambda x: 'Sem Categoria' if pd.isna(x) else x)
+df_limpa['PR_CAT'] = df_limpa['PR_CAT'].apply(lambda x: 'Sem Categoria' if pd.isna(x) or str(x).strip() == '#N/D' else x)
 
 # convertendo o tipo da coluna de data
 df_limpa['DATA'] = pd.to_datetime(df_limpa['DATA'], dayfirst=True, errors='coerce')
@@ -71,3 +71,20 @@ q3 = df_limpa['CL_FHL'].quantile(0.75)
 print('Q1 = (25%):', q1)
 print('Q2 = (50%):', q2)
 print('Q3 = (75%):', q3)
+print('-'*50)
+
+# agrupando por genero que mais comprou
+genero = df_limpa.groupby('CL_GENERO')['CO_ID'].count().sort_values(ascending=False)
+print('Gênero que mais comprou:', genero)
+print('-'*50)
+
+# agrupando por categoria mais vendida
+categoria = df_limpa.groupby('PR_CAT')['CO_ID'].count().sort_values(ascending=False)
+print('Categorias mais vendidas:')
+print(categoria)
+print('-'*50)
+
+# agrupando por classe econômica que mais fez compras
+classe = df_limpa.groupby('CL_SEG')['CO_ID'].count().sort_values(ascending=False)
+print('Classe econômica que mais comprou:')
+print(classe)
